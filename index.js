@@ -56,7 +56,7 @@ exports.ussdController = async (req, res) => {
     console.log('body', req.body)
 
     // This is the first request. Note how we start the response with CON
-    response = `CON Choose date, experty and rate$ that works for you?
+    response = `CON Choose date and rate$ that works for you?
 
     8. March 21 2024 8 am - 9 am | Dr. Bizuneh Abate (M) | hourly rate: 500 ETB
     9. March 26 2024 3 pm - 4 pm | Dr. Marta Solomon (F)| hourly rate: 700 ETB
@@ -68,14 +68,14 @@ exports.ussdController = async (req, res) => {
     const result = await africasTalking.SMS.send({
         to: phoneNumber,
         //message is random 6 digit number to simulate OTP
-        message: "Deposit amount on selected session @ CBE to account: 1000272819665 OR @ telebirr to ID: 4357. NOTE: include this reference number in comments/reference section of deposit (REF: 1039047284). After doing that wait for our verification of payment. Thank you.",
+        message: "Deposit amount on selected session @ CBE to account: 1000272819665 OR @ telebirr to tel: +251 930 586 155. NOTE: include this reference number in comments/reference section of deposit (REF: 1039047284). After doing that wait for our verification of payment. Thank you.",
         from: "MindMatters",
       });
 
     // This is the first request. Note how we start the response with CON
     response = `END Follow these steps to finalize booking of session:
     
-    Step 1: make full payment based on the instructions sent you via SMS. 
+    Step 1: make full payment based on the instructions sent to you via SMS. 
     Step 2: Wait for confirmation of payment
     Step 3: Be ready for receiving a call for the telephone session on the selected date
     `
