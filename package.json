@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hundag20/psychAssistUSSD/issues"
   },
-  "homepage": "https://github.com/hundag20/psychAssistUSSD#readme"
+  "homepage": "https://github.com/hundag20/psychAssistUSSD#readme",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
 }
