@@ -42,6 +42,7 @@ exports.ussdController = async (req, res) => {
     4. read tips`
             ;
   } else if (/^3\*/.test(text) && !text.substring(2).includes("*")) {
+    console.log('body', req.body)
     // This is the first request. Note how we start the response with CON
     response = `CON What do you need consultation on?
 
@@ -52,6 +53,8 @@ exports.ussdController = async (req, res) => {
             ;
   }
   else if (/^[567]\*.*/.test(text) && !text.substring(2).includes("*")) {
+    console.log('body', req.body)
+
     // This is the first request. Note how we start the response with CON
     response = `CON Choose date, experty and rate$ that works for you?
 
@@ -79,6 +82,8 @@ exports.ussdController = async (req, res) => {
             ;
   }
    else if (text) {
+    console.log('body', req.body)
+
     response = `END invalid input, please refer the menu`;
   }
 
