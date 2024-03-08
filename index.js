@@ -41,18 +41,18 @@ exports.ussdController = async (req, res) => {
     3. schedule for consultation
     4. read tips`
             ;
-  } else if (/^3\*/.test(text) && !text.substring(2).includes("*")) {
+  } else if (/3$/.test(text) && !text.substring(2).includes("*")) {
     console.log('body', req.body)
     // This is the first request. Note how we start the response with CON
     response = `CON What do you need consultation on?
 
-    5. Lonliness
+    5. Loneliness
     6. Discuss symptoms
     7. Ask mental health related questions
     `
             ;
   }
-  else if (/^[567]\*.*/.test(text) && !text.substring(2).includes("*")) {
+  else if (/[567]$/.test(text) && !text.substring(2).includes("*")) {
     console.log('body', req.body)
 
     // This is the first request. Note how we start the response with CON
@@ -64,7 +64,7 @@ exports.ussdController = async (req, res) => {
     `
             ;
   }
-  else if (/^[891][0-9]*\*./.test(text) && !text.substring(2 + text.match(/^\d+/)[0].length).includes("*")) {
+  else if (/[891][0-9]$/.test(text) && !text.substring(2 + text.match(/^\d+/)[0].length).includes("*")) {
     const result = await africasTalking.SMS.send({
         to: phoneNumber,
         //message is random 6 digit number to simulate OTP
@@ -82,7 +82,7 @@ exports.ussdController = async (req, res) => {
             ;
   }
    else if (text) {
-    console.log('body', req.body)
+    console.log('body at default', req.body)
 
     response = `END invalid input, please refer the menu`;
   }
