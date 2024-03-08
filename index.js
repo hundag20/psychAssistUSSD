@@ -1,5 +1,4 @@
-
-export async function ussdHandler(req, res) {
+exports.ussdController = (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   console.log("###########", req.body);
   // myLogger.info(req.body);
@@ -25,10 +24,6 @@ export async function ussdHandler(req, res) {
 
   res.set("Content-Type: text/plain");
   res.send(response);
-}
-
-export function ussdHandler2(req, res) {
-  console.log("ussd is posted");
 }
 
 //NOTE no login required because phone_num is already the validator, login would be redundant

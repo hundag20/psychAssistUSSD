@@ -1,8 +1,8 @@
 //get any request and return with 'hi'
 const express = require('express');
+const { ussdController } = require('./index.js');
 const app = express();
-const ussdController = require('./index.js');
-
+// const ussdController = require('./index.js');
 app.get('/', (req, res) => {
     res.send('hi');
 });
