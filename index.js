@@ -17,7 +17,7 @@ exports.ussdController = async (req, res) => {
     response = `CON 1. ጊዜያዊ የይለፍ ቃል ፍጠር (በ2 ደቂቃ ውስጥ ጊዜው ያበቃል)
     2. ይግቡ (የመነጨውን ጊዜያዊ የይለፍ ቃል ያስገቡ)`;
   } else if (text == "1") {
-    response = `CON Enter Fayda/National ID to login`;
+    response = `CON ለመግባት የፋይዳ/ብሔራዊ መታወቂያ ቁጥሮን ያስገቡ`;
   } else if (/^1\*/.test(text) && !text.substring(2).includes("*")) {
     try {
       const result = await africasTalking.SMS.send({
@@ -27,7 +27,7 @@ exports.ussdController = async (req, res) => {
         from: "national_ID_OTP",
       });
       console.log(result);
-      response = `END One Time Password (ጊዜያዊ የይለፍ ቃል) has been sent to your number. Use this for logging in (expires in 2 minutes)`;
+      response = `END ጊዜያዊ የይለፍ ቃል ወደ ቁጥርዎ ተልኳል። ለመግባት ይህንን ይጠቀሙ (በ2 ደቂቃ ውስጥ ጊዜው ያበቃል)`;
     } catch (ex) {
       console.error(ex.response);
     }
