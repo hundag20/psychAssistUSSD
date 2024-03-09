@@ -14,25 +14,25 @@ exports.ussdController = async (req, res) => {
   let response = "";
 
   if (text == "") {
-    response = `CON 1. OTP ፍጠር (በ2 ደቂቃ ውስጥ ጊዜው ያበቃል)
-    2. ይግቡ (የመነጨውን OTP ያስገቡ)`;
+    response = `CON 1. ጊዜያዊ የይለፍ ቃል ፍጠር (በ2 ደቂቃ ውስጥ ጊዜው ያበቃል)
+    2. ይግቡ (የመነጨውን ጊዜያዊ የይለፍ ቃል ያስገቡ)`;
   } else if (text == "1") {
     response = `CON Enter Fayda/National ID to login`;
   } else if (/^1\*/.test(text) && !text.substring(2).includes("*")) {
     try {
       const result = await africasTalking.SMS.send({
         to: phoneNumber,
-        //message is random 6 digit number to simulate OTP
+        //message is random 6 digit number to simulate ጊዜያዊ የይለፍ ቃል
         message: Math.floor(100000 + Math.random() * 900000).toString(),
         from: "national_ID_OTP",
       });
       console.log(result);
-      response = `END One Time Password (OTP) has been sent to your number. Use this for logging in (expires in 2 minutes)`;
+      response = `END One Time Password (ጊዜያዊ የይለፍ ቃል) has been sent to your number. Use this for logging in (expires in 2 minutes)`;
     } catch (ex) {
       console.error(ex.response);
     }
   } else if (text == "2") {
-    response = `CON ቁጥርዎ ላይ የተላከውን OTP ያስገቡ`;
+    response = `CON ቁጥርዎ ላይ የተላከውን ጊዜያዊ የይለፍ ቃል ያስገቡ`;
   }
   else if (/^2\*/.test(text) && !text.substring(2).includes("*")) {
     // This is the first request. Note how we start the response with CON
@@ -67,7 +67,7 @@ exports.ussdController = async (req, res) => {
   else if (text.match(/[89][0-9]?$|10$/)) {
     const result = await africasTalking.SMS.send({
         to: phoneNumber,
-        //message is random 6 digit number to simulate OTP
+        //message is random 6 digit number to simulate ጊዜያዊ የይለፍ ቃል
         message: "የተቀማጭ ገንዘብ በተመረጠው ክፍለ ጊዜ @ CBE በሒሳብ፡ 1000272819665 ወይም @ telebirr በስልክ ቁጥር +251 930 586 155. ማሳሰቢያ፡ ይህንን የማጣቀሻ ቁጥር በአስተያየቶች/በማስቀመጫ ክፍል (ማጣቀሻ፡ 1039047284) ያካትቱ። ያንን ካደረግን በኋላ የክፍያ ማረጋገጫችንን ይጠብቁ።    እናመሰግናለን!",
         from: "MindMatters",
       });
