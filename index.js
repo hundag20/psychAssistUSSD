@@ -14,8 +14,8 @@ exports.ussdController = async (req, res) => {
   let response = "";
 
   if (text == "") {
-    response = `CON 1. Generate OTP (expires in 2 minutes)
-    2. Login (enter generated OTP)`;
+    response = `CON 1. OTP ፍጠር (በ2 ደቂቃ ውስጥ ጊዜው ያበቃል)
+    2. ይግቡ (የመነጨውን OTP ያስገቡ)`;
   } else if (text == "1") {
     response = `CON Enter Fayda/National ID to login`;
   } else if (/^1\*/.test(text) && !text.substring(2).includes("*")) {
@@ -32,23 +32,23 @@ exports.ussdController = async (req, res) => {
       console.error(ex.response);
     }
   } else if (text == "2") {
-    response = `CON Enter OTP that was sent your number`;
+    response = `CON ቁጥርዎ ላይ የተላከውን OTP ያስገቡ`;
   }
   else if (/^2\*/.test(text) && !text.substring(2).includes("*")) {
     // This is the first request. Note how we start the response with CON
-    response = `CON Welcome to Mind Matters. Choose a service
+    response = `CON ወደ አእምሮ ጉዳዮች እንኳን በደህና መጡ። አገልግሎት ይምረጡ
 
-    3. schedule for consultation
-    4. read tips`
+    3. የምክክር (ቴራፒ) መርሃ ግብር
+    4. ጠቃሚ ምክሮችን ያንብቡ`
             ;
   } else if (text.match(/3$/)) {
     console.log('body', req.body)
     // This is the first request. Note how we start the response with CON
-    response = `CON What do you need consultation on?
+    response = `CON በምን ላይ ምክክር ይፈልጋሉ?
 
-    5. Loneliness
-    6. Discuss symptoms
-    7. Ask mental health related questions
+    5. ብቸኝነት
+    6. ምልክቶችን ተወያዩ
+    7. ከአእምሮ ጤና ጋር የተያያዙ ጥያቄዎችን ይጠይቁ
     `
             ;
   }
@@ -56,11 +56,11 @@ exports.ussdController = async (req, res) => {
     console.log('body', req.body)
 
     // This is the first request. Note how we start the response with CON
-    response = `CON Choose date and rate$ that works for you?
+    response = `CON ለእርስዎ የሚመቾትን ቀን እና ደረጃ ይምረጡ
 
-    8. March 21 2024 8 am - 9 am | Dr. Bizuneh Abate (M) | hourly rate: 500 ETB
-    9. March 26 2024 3 pm - 4 pm | Dr. Marta Solomon (F)| hourly rate: 700 ETB
-    10. March 18 2024 10 am - 11 am | Dr. Meron Girma (F)| hourly rate: 350 ETB
+    8. የካቲት 21 2024 8 am - 9 am | ዶ/ር ብዙነህ አባተ (ወንድ) | የሰዓት ዋጋ: 500 ETB
+    9. የካቲት 26 2024 3 pm - 4 ከሰዓት | ዶ/ር ማርታ ሰሎሞን (ሴት)| የሰዓት ዋጋ: 700 ETB
+    10. የካቲት 18 2024 10 am - 11 am | ዶ/ር ሜሮን ግርማ (ሴት)| የሰዓት ዋጋ: 350 ETB
     `
             ;
   }
@@ -68,23 +68,24 @@ exports.ussdController = async (req, res) => {
     const result = await africasTalking.SMS.send({
         to: phoneNumber,
         //message is random 6 digit number to simulate OTP
-        message: "Deposit amount on selected session @ CBE to account: 1000272819665 OR @ telebirr to tel: +251 930 586 155. NOTE: include this reference number in comments/reference section of deposit (REF: 1039047284). After doing that wait for our verification of payment. Thank you.",
+        message: "የተቀማጭ ገንዘብ በተመረጠው ክፍለ ጊዜ @ CBE በሒሳብ፡ 1000272819665 ወይም @ telebirr በስልክ ቁጥር +251 930 586 155. ማሳሰቢያ፡ ይህንን የማጣቀሻ ቁጥር በአስተያየቶች/በማስቀመጫ ክፍል (ማጣቀሻ፡ 1039047284) ያካትቱ። ያንን ካደረግን በኋላ የክፍያ ማረጋገጫችንን ይጠብቁ።    እናመሰግናለን!",
         from: "MindMatters",
       });
 
     // This is the first request. Note how we start the response with CON
-    response = `END Follow these steps to finalize booking of session:
-    
-    Step 1: make full payment based on the instructions sent to you via SMS. 
-    Step 2: Wait for confirmation of payment
-    Step 3: Be ready for receiving a call for the telephone session on the selected date
+    response = `END 
+    የክፍለ-ጊዜ ቦታ ማስያዝን ለማጠናቀቅ እነዚህን ደረጃዎች ይከተሉ፡-
+        
+        ደረጃ 1፡ በኤስኤምኤስ በኩል በተላከልህ መመሪያ መሰረት ሙሉ ክፍያ ፈጽም።
+        ደረጃ 2፡ የክፍያ ማረጋገጫን ይጠብቁ
+        ደረጃ 3፡ በተመረጠው ቀን ለስልክ ክፍለ ጊዜ ጥሪ ለመቀበል ዝግጁ ይሁኑ
     `
             ;
   }
    else if (text) {
     console.log('body at default', req.body)
 
-    response = `END invalid input, please refer the menu`;
+    response = `END ልክ ያልሆነ ግቤት፣ እባክዎን ማውጫውን ይመልከቱ`;
   }
 
   res.set("Content-Type: text/plain");
